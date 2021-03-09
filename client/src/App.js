@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 
 function App() {
+  useEffect(() => {
+    const socket = io("http://localhost:3100");
+
+    return () => socket.disconnect();
+  }, [])
   const [message, setMessage] = useState("");
 
   function sendMessage() {
-    console.log(message);
+    // socket.emit("message", message)
   }
 
   function onMessageChange(val) {
